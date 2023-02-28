@@ -11,7 +11,7 @@
 class StudentList {
 public:
 
-	void buildStudentList(std::string, char, char);
+	void buildStudentList(std::string);
 	void printStudentList();
 
 
