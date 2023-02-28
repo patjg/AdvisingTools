@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <map>
 #include <string>
 #include <vector>
 #include <iterator>
@@ -14,12 +13,11 @@ public:
 
 	void buildStudentList(std::string, char, char);
 	void printStudentList();
-	void setColumnHeaders();
 
 
 private:
 
-	std::map <int, std::map <int, std::string> > studentlist;
-	std::map <int, std::string> columnHeaders;
+	std::vector <std::vector <std::string> > studentlist;
+
 
 };

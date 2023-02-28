@@ -2,16 +2,14 @@
 
 using namespace std;
 
-void StudentList::buildStudentList(string filepath, char rangeBegin, char rangeEnd) {
+void StudentList::buildStudentList(string filepath) 
+{
 
 	//declare variables to be used locally in class
 	ifstream inputstream;
-	char tmpcontents{};
 	string tmpstring;
-	map <int, string> tmpmap;
-	map <int, map <int, string> > buildstudentlist;
-	int column{ 1 };
-	int row{ 1 };
+	vector <string> tmpvec;
+	
 
 	/*conditional to check for txt file, which is currently the only usable filetype
 
@@ -81,60 +79,34 @@ void StudentList::buildStudentList(string filepath, char rangeBegin, char rangeE
 			}
 			else if (character == '\t' || character == ',')
 			{
-				tmpmap.insert(pair<int, string>(column, tmpstring));
+				tmpvec.push_back(tmpstring);
 				column++;
 				tmpstring.clear();
 			}
-			else if (character == '\n' && !tmpmap.empty())
+			else if (character == '\n')
 			{	
-				buildstudentlist.insert(pair <int, map <int, string> >(row, tmpmap));
+				studentlist.push_back(tmpvec);
 				row++;
 				column = 1;
-				tmpmap.clear();
-			}
-			else
-			{
-				cout << "Nothing was placed into tmpstring, tmpmap, or buildStudentList.";
+				tmpvec.clear();
 			}
 			
 		}
-
+		inputstream.close();
 	}
-
-
-	studentlist = buildstudentlist;
-	if (buildstudentlist.empty()) 
-	{
-		cout << "There was an error building your student list." << endl;
-	}
-	else
-	{
-		cout << "Your student list was built." << endl;
-	}
-}
-
-
 
 
 //Print Student List Function
 
 void StudentList::printStudentList() {
 
-	for (auto const &itr : studentlist)
+	for (auto const & itr : studentlist)
 	{
-		cout << "Row " << itr.first << ": ";
-		for (auto const &itr1 : itr.second) 
+		for (auto const& itr1->itr.begin())
 		{
-			if (itr1.first == 1)
-			{
-				cout << itr1.first << ": " << setw(20) << left << itr1.second;
-			}
-			else
-			{
-				cout << setw(10) << right << itr1.first << ": " << itr1.second;
-			}
+			cout << left << *itr1 << '\t';
 		}
-		cout << endl << endl;
+		cout << endl;
 	}
 }
 
